@@ -1,7 +1,8 @@
 *{
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 0; 
+  font-family: 'NanumSquareNeo';
 }
 body{
   background-image: 
@@ -37,6 +38,8 @@ header nav ul li:hover{
 header nav ul li a{
   text-decoration: 0;
   color: white;
+  font-family: 'NanumSquareNeoBold';
+
 }
 
 /* main------------------------- */
@@ -65,6 +68,8 @@ main #greeting h1{
   padding: 0px;
   margin: 0px;
   vertical-align: middle;
+  letter-spacing: 0.8px;
+  font-family: 'NanumSquareNeoExtraBold';
 }
 
 main #detail{
@@ -77,6 +82,8 @@ main #detail{
   margin: 16px 0 8px 0;
   padding: 0;
   font-size: 24px;
+  font-family: 'Kanit', sans-serif;
+  letter-spacing: 0.5px;
 }
 #detail ul,ol{
   list-style: none;
@@ -107,6 +114,7 @@ main #detail{
 }
 #detail b{
   margin-left: 8px;
+  font-family:NanumSquareNeoBold;
 }
 #detail span{
   color: rgb(156, 164, 173);
