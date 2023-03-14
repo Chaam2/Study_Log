@@ -10,3 +10,113 @@ body{
   background-repeat:repeat;
 }
 
+/* Header------------------------- */
+header nav{
+  background-color: #acb8ce;
+  height: 54px;
+  width: 100%;
+  padding-left: 8px;
+  position: fixed;
+  z-index: 3; /*숫자 클수록 Z축에서 앞에 위치 */
+}
+header nav ul li{
+  list-style: none;
+  padding:8px;  
+  margin: 8px;
+  float: left;
+
+  transition: all 0.5s ease;
+}
+header nav ul li:hover{
+  background-color: #8c95a6;
+  border-radius: 24px;
+  text-align: center;
+  padding: 8px 24px;
+  letter-spacing: 4px;
+}
+header nav ul li a{
+  text-decoration: 0;
+  color: white;
+}
+
+/* main------------------------- */
+main{
+  clear:both;
+  padding: 78px 24px;
+}
+
+main #greeting .photo-container{
+  overflow: hidden;
+  width: 300px;
+  height: 300px;
+  float: left;
+  margin-bottom: 24px;
+  margin-right: 24px;
+}
+main #greeting img{
+  width: 100%;
+  height: 100%;
+  transition: all 0.8s ease;
+}
+main #greeting img:hover{
+  transform: scale(116%);
+}
+main #greeting h1{
+  padding: 0px;
+  margin: 0px;
+  vertical-align: middle;
+}
+
+main #detail{
+  clear: both;
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 2fr;/*세로/가로*/
+  gap: 24px
+}
+#detail h2{
+  margin: 16px 0 8px 0;
+  padding: 0;
+  font-size: 24px;
+}
+#detail ul,ol{
+  list-style: none;
+  padding-left: 8px;
+}
+#detail li{
+  padding-bottom: 8px;
+
+}
+#detail .profile ul{
+  padding-left: 0;
+}
+#detail .profile img{
+  width: 16px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+#detail .skills li{
+  float: left;
+  padding: 8px;
+}
+#detail a{
+  text-decoration: none;
+  color: #657eae;
+}
+#detail a:hover{
+  color: #5faede;
+}
+#detail b{
+  margin-left: 8px;
+}
+#detail span{
+  color: rgb(156, 164, 173);
+  margin-left: 4px;
+}
+/* footer------------------------- */
+footer{
+  background-color: #d8dbe2d2;
+  padding: 40px 24px;
+}
+footer p{
+  color: #989899;
+}
