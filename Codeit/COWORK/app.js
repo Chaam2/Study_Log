@@ -22,7 +22,7 @@ app.get('/api/members/:id',(req,res)=>{//Route Parameter
     res.send(member);
   } else{
     res.status(404)
-      .send({ messeage:'There is no such member' });
+      .send({ messeage:'There is no member with the id!' });
   }
 })
 
@@ -32,6 +32,29 @@ app.post('/api/members',(req,res)=>{
   res.send(newMember); // 추가한 객체를 res에 담아 보내준다.
 })
 
+app.put('/api/members/:id', (req, res) => {
+  const { id } = req.params;
+  const newInfo = req.body;
+  const member = members.find((m) => m.id === Number(id));
+  if (member) {
+    Object.keys(newInfo).forEach((prop) => {
+      member[prop] = newInfo[prop];
+    });
+    res.send(member);
+  } else {
+    res.status(404).send({ message: 'There is no member with the id' });
+  }
+});
+
+app.delete('/api/members/:id',(req,res)=>{
+  const { id } = req.params
+  members = members.filter((m)=>{m.id !== Number(id)})
+  if(id){
+    res.send({messeage:'Deleted'})
+  }else{
+    res.status(404).send({messeage:'There is no member with the id!'})
+  }
+})
 app.listen(3000,()=>{
   console.log('Server is listening...')
 })
