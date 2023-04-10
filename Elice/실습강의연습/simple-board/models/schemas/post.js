@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose')
-const shortId = require('./types/short-id')
+const shortId = require('./types/short-id.js')
 
 const PostSchema = new Schema({
   shortId,
