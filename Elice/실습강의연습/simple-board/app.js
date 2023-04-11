@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose')
 const dayjs = require('dayjs')
+const { createSampleData } = require('./models')
+createSampleData();
 
 var indexRouter = require('./routes/index');
 var postsRouter = require('./routes/posts');

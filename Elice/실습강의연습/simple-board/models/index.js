@@ -1,11 +1,23 @@
-const mongoose = require('mongoose')
-const PostSchema = require('./schemas/post')
+const mongoose = require('mongoose');
+const PostSchema = require('./schemas/post');
 
-exports.Post = mongoose.model('Post',PostSchema)
-/* ㄴ> 모델함수를 포스트라는 변수에 정의하고 내보낸것
-const Post = mongoose.model('Post',PostSchema)
-module exports = Post
-ㄴ요거를 줄여서 쓴것
-다른파일에서 require할때는
-const Post = require('./models/post').Post 또는
-const { Post } = require('../models/post') 이렇게 */
+const Post = mongoose.model('Post', PostSchema);
+
+const createSampleData = async () => {
+  await Post.deleteMany({}); // 모든 게시글 삭제
+
+  const postList = [];
+
+  for (let i = 1; i <= 100; i++) {
+    postList.push({
+      title: `제목 ${i}`,
+      content: `내용 ${i}`,
+    });
+  }
+
+  await Post.insertMany(postList); // 샘플 데이터 추가
+
+  console.log('Sample data created successfully!');
+};
+
+module.exports = { Post, createSampleData };

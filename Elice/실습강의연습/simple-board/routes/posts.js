@@ -12,13 +12,12 @@ router.get('/', asyncHandler(async(req,res)=>{
   
   const page = Number(req.query.page || 1);
   const perPage = Number(req.query.perPage || 10);
-  const [total, posts] = Promise.all([
-    Post.countDocuments({}),
-    Post.find({})
-      .sort({createdAt : -1})
-      .skip(perPage * (page-1))
-      .limit(perPage)
-  ])
+  const total = await Post.countDocuments({})
+  const posts = await Post.find({})
+    .sort({createdAt : -1})
+    .skip(perPage * (page-1))
+    .limit(perPage)
+  
   const totalPage = Math.ceil(total/perPage)
 
   res.render('post/list',{ posts, page, totalPage, perPage }) //render(템플릿이름, 전달되는값)
