@@ -15,7 +15,7 @@ const PostSchema = new Schema({
     type:String,
     default : '작성자',
   }
-},{thimestamps : true,}
+},{timestamps : true,}
 )
 
 module.exports = PostSchema

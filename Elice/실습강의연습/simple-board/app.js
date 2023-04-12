@@ -5,8 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose')
 const dayjs = require('dayjs')
-const { createSampleData } = require('./models')
-createSampleData();
+
 
 var indexRouter = require('./routes/index');
 var postsRouter = require('./routes/posts');
@@ -22,8 +21,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-app.locals.formatDate = (date)=>{ // 로컬 변수 -> 이 어플리케이션 전체에서 접근 가능하다.
-  return dayjs(date).format('YYYY-DD-MM HH:mm:ss')
+// 로컬 변수 -> 이 어플리케이션 전체에서 접근 가능하다.
+app.locals.formatDate = (date)=>{ 
+  return dayjs(date).format('YYYY-MM-DD HH:mm:ss')
 }
 
 app.use(logger('dev'));
@@ -55,4 +55,6 @@ app.listen(4000, () => {
   console.log('Server is running on port 4000!');
 });
 
+const { createSampleData } = require('./models')
+//createSampleData();
 module.exports = app;
