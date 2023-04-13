@@ -71,7 +71,7 @@ res.redirect(`/posts/${shortId}`)
 router.delete('/:shortId',asyncHandler(async(req,res,next)=>{
   const { shortId }= req.params
   await Post.deleteOne({ shortId })
-  res.send('OK')
+  res.send('ok')
 }))
 
 module.exports = router;
