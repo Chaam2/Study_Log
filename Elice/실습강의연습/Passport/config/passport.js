@@ -32,7 +32,7 @@ module.exports = function(passport){
 //로그인 성공한 유저->세션에 저장
 passport.serializeUser((user, done)=>{
   done(null, user.id)
-});// user의 아이디를 세션에 저장하는 것
+});// user의 아이디를 세션에 저장하는 것 
 
 //세션에 저장된 정보를 기반으로 실제 유저객체를 찾는것
 passport.deserializeUser((id,done)=>{ //세션에 저장된 id값 찾아서
