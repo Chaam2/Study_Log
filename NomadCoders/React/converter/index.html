@@ -21,15 +21,15 @@
   <script type="text/babel">
     function Time() {
       const [amount, setAmount] = React.useState();
-      const [timeType, setTimeType] = React.useState('hour');
+      const [unitType, setUnitType] = React.useState('hour');
       const handleChange = (e) => {
         const type = e.target.dataset.type;
         const value = Number(e.target.value);
         if (type === 'hour') {
-          setTimeType('hour');
+          setUnitType('hour');
           setAmount(value);
         } else if (type === 'minute') {
-          setTimeType('minute');
+          setUnitType('minute');
           setAmount(value);
         }
       };
@@ -39,7 +39,7 @@
             type="number"
             id="hour"
             data-type="hour"
-            value={timeType === 'hour' ? amount : amount / 60}
+            value={unitType === 'hour' ? amount : amount / 60}
             onChange={handleChange}
           />
           <label htmlFor="hour">시간</label>=
@@ -47,14 +47,53 @@
             type="number"
             id="minute"
             data-type="minute"
-            value={timeType === 'minute' ? amount : amount * 60}
+            value={unitType === 'minute' ? amount : amount * 60}
             onChange={handleChange}
           />
           <label htmlFor="minute">분</label>
         </div>
       );
     }
+    function Length() {
+      const [amount, setAmount] = React.useState();
+      const [unitType, setUnitType] = React.useState('평');
+      const handleChange = (e) => {
+        const type = e.target.dataset.type;
+        const value = Number(e.target.value);
+        if (type === '평') {
+          setUnitType('평');
+          setAmount(value);
+        } else if (type === 'm2') {
+          setUnitType('m2');
+          setAmount(value);
+        }
+      };
+      return (
+        <div>
+          <input
+            type="number"
+            id="평"
+            data-type="평"
+            value={unitType === '평' ? amount : amount* 0.3025}
+            onChange={handleChange}
+          />
+          <label htmlFor="평">평</label>=
+          <input
+            type="number"
+            id="m2"
+            data-type="m2"
+            value={unitType === 'm2' ? amount : amount * 3.305785}
+            onChange={handleChange}
+          />
+          <label htmlFor="m2">m<sup>2</sup>(제곱미터)</label>
+        </div>
+      );
+    }
     function App() {
+      const [convertType, setConvertType] = React.useState('length');
+      const handleSelect = (e) => {
+        setConvertType(e.target.value);
+      };
       const handleReset = () => {
         const inputs = document.querySelectorAll('input');
         inputs.forEach((i) => (i.value = ''));
@@ -62,11 +101,13 @@
       return (
         <div>
           <h1>단위 변환기</h1>
-          <select name="type" id="type">
+          <select value={convertType} name="type" onChange={handleSelect}>
             <option value="time">시간 변환기</option>
-            <option value="length">길이 변환기</option>
+            <option value="length">평수 변환기</option>
           </select>
-          <Time />
+          {convertType === 'time' ? <Time /> : null}
+          {convertType === 'length' ? <Length /> : null}
+
           <button onClick={handleReset}>초기화</button>
         </div>
       );
