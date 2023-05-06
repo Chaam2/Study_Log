@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Converter</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    crossorigin
+    src="https://unpkg.com/react@17/umd/react.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function Time() {
+      const [amount, setAmount] = React.useState();
+      const [timeType, setTimeType] = React.useState('hour');
+      const handleChange = (e) => {
+        const type = e.target.dataset.type;
+        const value = Number(e.target.value);
+        if (type === 'hour') {
+          setTimeType('hour');
+          setAmount(value);
+        } else if (type === 'minute') {
+          setTimeType('minute');
+          setAmount(value);
+        }
+      };
+      return (
+        <div>
+          <input
+            type="number"
+            id="hour"
+            data-type="hour"
+            value={timeType === 'hour' ? amount : amount / 60}
+            onChange={handleChange}
+          />
+          <label htmlFor="hour">시간</label>=
+          <input
+            type="number"
+            id="minute"
+            data-type="minute"
+            value={timeType === 'minute' ? amount : amount * 60}
+            onChange={handleChange}
+          />
+          <label htmlFor="minute">분</label>
+        </div>
+      );
+    }
+    function App() {
+      const handleReset = () => {
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach((i) => (i.value = ''));
+      };
+      return (
+        <div>
+          <h1>단위 변환기</h1>
+          <select name="type" id="type">
+            <option value="time">시간 변환기</option>
+            <option value="length">길이 변환기</option>
+          </select>
+          <Time />
+          <button onClick={handleReset}>초기화</button>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</html>
