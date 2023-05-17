@@ -33,7 +33,7 @@ function App() {
     if (options.offset === 0) {
       setItems(reviews);
     } else {
-      setItems([...items, ...reviews]);
+      setItems((prev) => [...prev, ...reviews]);
     }
     setOffset(options.offset + options.limit);
     setHasNext(paging.hasNext);
@@ -50,9 +50,7 @@ function App() {
         <button onClick={handleBestClick}>평점순</button>
       </div>
       <ReviewList items={sortedItems} 삭제함수이름={삭제함수} />
-      <button onClick={handleLoadMore} disabled={!hasNext}>
-        더보기
-      </button>
+      {hasNext && <button onClick={handleLoadMore}>더보기</button>}
     </div>
   );
 }
