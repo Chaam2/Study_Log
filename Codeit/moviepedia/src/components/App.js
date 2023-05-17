@@ -7,6 +7,8 @@ function App() {
   const [offset, setOffset] = useState(0);
   const [hasNext, setHasNext] = useState(true);
   const [order, setOrder] = useState('createdAt');
+  const [isLoading, setIsLoading] = useState(false);
+
   const sortedItems = items.sort((a, b) => b[order] - a[order]);
 
   const handleNewestClick = () => {
@@ -29,14 +31,21 @@ function App() {
   }, [order]);
 
   const handleLoad = async (options) => {
-    const { reviews, paging } = await getReviews(options);
-    if (options.offset === 0) {
-      setItems(reviews);
-    } else {
-      setItems((prev) => [...prev, ...reviews]);
+    try {
+      setIsLoading(true);
+      const { reviews, paging } = await getReviews(options);
+      if (options.offset === 0) {
+        setItems(reviews);
+      } else {
+        setItems((prev) => [...prev, ...reviews]);
+      }
+      setOffset(options.offset + options.limit);
+      setHasNext(paging.hasNext);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
     }
-    setOffset(options.offset + options.limit);
-    setHasNext(paging.hasNext);
   };
 
   const handleLoadMore = () => {
@@ -50,7 +59,11 @@ function App() {
         <button onClick={handleBestClick}>평점순</button>
       </div>
       <ReviewList items={sortedItems} 삭제함수이름={삭제함수} />
-      {hasNext && <button onClick={handleLoadMore}>더보기</button>}
+      {hasNext && (
+        <button disabled={isLoading} onClick={handleLoadMore}>
+          더보기
+        </button>
+      )}
     </div>
   );
 }
