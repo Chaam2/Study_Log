@@ -34,6 +34,7 @@ function App() {
     try {
       setIsLoading(true);
       const { reviews, paging } = await getReviews(options);
+      console.log('🚀 ~ file: App.js:37 ~ handleLoad ~ reviews:', reviews);
       if (options.offset === 0) {
         setItems(reviews);
       } else {
