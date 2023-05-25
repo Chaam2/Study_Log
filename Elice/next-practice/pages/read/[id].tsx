@@ -3,42 +3,27 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-export const getServerSideProps = async () => {
-  console.log(
-    '🚀 ~ file: [id].tsx:14 ~ getServerSideProps ~ getServerSideProps:',
-    getServerSideProps
-  );
+export const getServerSideProps = async (context) => {
+  console.log('getServerSideProps');
+  const response = await fetch(
+    'http://localhost:3000/api/topics/' + context.query.id
+  ); //풀 경로를 넣어줘야한다(context)는 서버에서 실행되기때문
+  const result = await response.json();
   return {
-    props: {
-      title: 'haha',
-      body: 'hoho',
-    },
+    props: result,
   };
 };
 
 export default function Read(props) {
-  console.log('🚀 ~ file: [id].tsx:17 ~ Read ~ Read:', Read);
+  console.log('Read', props);
 
-  const router = useRouter();
-  const [topic, setTopic] = useState(null);
-  const id = router.query.id;
-  useEffect(() => {
-    if (id !== undefined) {
-      fetch('/api/topics/' + id)
-        .then((res) => res.json())
-        .then((result) => setTopic(result));
-    }
-  }, [id]);
-  if (topic === null) {
-    return <>Loading...</>;
-  }
   return (
     <>
       <Head>
         <title>WEB!</title>
       </Head>
-      <h2>{topic.title}</h2>
-      {topic.body}
+      <h2>{props.title}</h2>
+      {props.body}
     </>
   );
 }
