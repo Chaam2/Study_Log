@@ -3,7 +3,22 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-export default function Read() {
+export const getServerSideProps = async () => {
+  console.log(
+    '🚀 ~ file: [id].tsx:14 ~ getServerSideProps ~ getServerSideProps:',
+    getServerSideProps
+  );
+  return {
+    props: {
+      title: 'haha',
+      body: 'hoho',
+    },
+  };
+};
+
+export default function Read(props) {
+  console.log('🚀 ~ file: [id].tsx:17 ~ Read ~ Read:', Read);
+
   const router = useRouter();
   const [topic, setTopic] = useState(null);
   const id = router.query.id;
