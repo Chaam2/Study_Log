@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 export const getServerSideProps = async (context) => {
-  console.log('getServerSideProps');
+  console.log('getServerSideProps', context.query.id);
   const response = await fetch(
-    process.env.API_URL + '/api/topics/' + context.query.id
+    process.env.NEXT_PUBLIC_API_URL + '/api/topics/' + context.query.id
   ); //풀 경로를 넣어줘야한다(context)는 서버에서 실행되기때문
   const result = await response.json();
   return {

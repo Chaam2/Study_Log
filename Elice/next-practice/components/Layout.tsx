@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 type topicType = {
   id: number;
@@ -9,11 +10,13 @@ type topicType = {
 //@ts-ignore
 export default function Layout(props) {
   const [topics, setTopics] = useState<topicType[]>([]);
+  const router = useRouter();
+  const id = router.query.id;
   useEffect(() => {
     fetch('/api/topics')
       .then((res) => res.json())
       .then((result) => setTopics(result));
-  }, []);
+  }, [router.asPath]);
   return (
     <>
       <header>
@@ -38,12 +41,28 @@ export default function Layout(props) {
         <li>
           <Link href="/create">Create</Link>
         </li>
-        <li>
-          <Link href="/update">Update</Link>
-        </li>
-        <li>
-          <Link href="/delete">Delete</Link>
-        </li>
+        {id === undefined ? (
+          <></>
+        ) : (
+          <>
+            <li>
+              <Link href={`/update/${id}`}>Update</Link>
+            </li>
+            <li>
+              <button
+                onClick={() => {
+                  fetch(process.env.NEXT_PUBLIC_API_URL + '/api/topics/' + id, {
+                    method: 'DELETE',
+                  })
+                    .then((res) => res.json())
+                    .then((result) => router.push('/'));
+                }}
+              >
+                Delete
+              </button>
+            </li>
+          </>
+        )}
       </ul>
     </>
   );
