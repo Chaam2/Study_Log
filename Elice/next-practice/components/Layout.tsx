@@ -1,7 +1,19 @@
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+type topicType = {
+  id: number;
+  title: string;
+  body: string;
+};
 
 //@ts-ignore
 export default function Layout(props) {
+  const [topics, setTopics] = useState<topicType[]>([]);
+  useEffect(() => {
+    fetch('/api/topics')
+      .then((res) => res.json())
+      .then((result) => setTopics(result));
+  }, []);
   return (
     <>
       <header>
@@ -12,12 +24,13 @@ export default function Layout(props) {
       <input type="text" placeholder="search"></input>
       <nav>
         <ol>
-          <li>
-            <Link href="/read/1">html</Link>
-          </li>
-          <li>
-            <Link href="/read/2">css</Link>
-          </li>
+          {topics.map((topic) => {
+            return (
+              <li key={topic.id}>
+                <Link href={`/read/${topic.id}`}>{topic.title}</Link>
+              </li>
+            );
+          })}
         </ol>
       </nav>
       <article>{props.children}</article>
