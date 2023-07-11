@@ -1,14 +1,19 @@
-html {
-  font-size: 18px;
+body.dark {
+  background-color: #000000;
+  color: #ffffff;
 }
 
-body {
-  background-color: #121212;
+body.dark a {
+  color: #ffffff;
 }
 
-body,
-body a {
-  color: #f9f9f9;
+body.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.light a {
+  color: #000000;
 }
 
 a {

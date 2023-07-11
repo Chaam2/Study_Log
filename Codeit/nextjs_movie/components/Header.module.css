@@ -2,6 +2,11 @@
   border-bottom: 1px solid #1f1f1f;
 }
 
+/* CSS Modules라이브러리 문법 */
+:global(.light) .header {
+  border-color: #e1e1e1;
+}
+
 .container {
   display: flex;
   justify-content: space-between;

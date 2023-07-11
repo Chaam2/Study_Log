@@ -12,7 +12,7 @@ export default function Search() {
 
   const getSearchedMovie = async () => {
     const response = await axios.get(`/movies/?q=${q}`);
-    setMovie(response.data.results);
+    setMovie(response.data.results ?? []);
   };
   useEffect(() => {
     getSearchedMovie();
