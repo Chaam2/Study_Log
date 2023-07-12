@@ -4,6 +4,7 @@ import styles from '@/styles/Movie.module.css';
 import axios from '@/lib/axios';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Head from 'next/head';
 
 const labels = {
   rating: {
@@ -40,6 +41,9 @@ export default function Movie() {
 
   return (
     <>
+      <Head>
+        <title>{movie.title} - WATCHIT</title>
+      </Head>
       <div className={styles.header}>
         <div className={styles.Image}>
           <Image

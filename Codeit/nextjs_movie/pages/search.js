@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import MovieList from '@/components/MovieList';
 import SearchForm from '@/components/SearchForm';
 import styles from '@/styles/Search.module.css';
@@ -20,6 +21,9 @@ export default function Search() {
 
   return (
     <>
+      <Head>
+        <title>{q} 검색 결과 - WATCHIT</title>
+      </Head>
       <SearchForm initialValue={q} />
       <h2 className={styles.title}>
         <span className={styles.keyword}>{q}</span> 검색 결과
