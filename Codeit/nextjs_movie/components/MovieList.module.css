@@ -10,10 +10,11 @@
   padding: 10px 20px;
 }
 
-.poster {
+.Image {
+  position: relative;
   display: block;
   border-radius: 10px;
-  aspect-ratio: 27 / 40;
+  aspect-ratio: 27 / 40; /*가로세로비율*/
   width: 100%;
   overflow: hidden;
 }
